@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./App.css";
 import CardExampleGroups from "./Group";
 import "semantic-ui-css/semantic.min.css";
-import { Card, Table } from "semantic-ui-react";
-import { countries, GroupItem } from "./utils";
+import { Button, Card, Grid, Table } from "semantic-ui-react";
+import { countries, createInitialGroups, createRandomGroups, GroupItem } from "./utils";
 import Country from "./Country";
 
 interface GroupPros {
@@ -21,9 +21,8 @@ export const Eliminations: React.FC<GroupPros> = ({ groups, setGroups }) => {
     let group = groups.find((x) => x.countries.includes(selectedCountry));
 
     const indexOf = group?.countries.indexOf(selectedCountry);
-    if (indexOf !== -1 && indexOf != undefined){
-        group?.countries.splice(indexOf,1, code as string);
-
+    if (indexOf !== -1 && indexOf != undefined) {
+      group?.countries.splice(indexOf, 1, code as string);
     }
     setGroups([...groups]);
   };
@@ -35,14 +34,24 @@ export const Eliminations: React.FC<GroupPros> = ({ groups, setGroups }) => {
   countries.forEach((item) => {
     if (!selectedCountries.includes(item.countryCode)) {
       availableCountries.push(item);
-      
     }
   });
 
   return (
-    <div className="App">
-      <br></br>
-
+    <div>
+      <Grid>
+        <Grid.Column width={2}>
+          <Button primary onClick={() => setGroups(createInitialGroups())}>
+            Ustaw grupy
+          </Button>
+        </Grid.Column>
+        <Grid.Column width={2}>
+          <Button primary onClick={() => setGroups(createRandomGroups())}>
+            Losuj grupy
+          </Button>
+        </Grid.Column>
+      </Grid>
+      <br />
       <Card.Group>
         {groups.slice(0, 4).map((x) => (
           <CardExampleGroups
