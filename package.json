@@ -46,6 +46,7 @@
   },
   "devDependencies": {
     "@types/react-world-flags": "^1.4.2",
-    "emotion": "^11.0.0"
+    "emotion": "^11.0.0",
+    "gh-pages": "^5.0.0"
   }
 }
