@@ -3,7 +3,12 @@ import "./App.css";
 import CardExampleGroups from "./Group";
 import "semantic-ui-css/semantic.min.css";
 import { Button, Card, Grid, Table } from "semantic-ui-react";
-import { countries, createInitialGroups, createRandomGroups, GroupItem } from "./utils";
+import {
+  countries,
+  createInitialGroups,
+  createRandomGroups,
+  GroupItem,
+} from "./utils";
 import Country from "./Country";
 
 interface GroupPros {
@@ -36,6 +41,12 @@ export const Eliminations: React.FC<GroupPros> = ({ groups, setGroups }) => {
       availableCountries.push(item);
     }
   });
+
+  console.log(
+    "availableCountries",
+    availableCountries,
+    Math.ceil(availableCountries.length / 4)
+  );
 
   return (
     <div>
@@ -73,42 +84,44 @@ export const Eliminations: React.FC<GroupPros> = ({ groups, setGroups }) => {
       </Card.Group>
       <Table compact>
         <Table.Body>
-          {[...Array(Math.round(availableCountries.length / 4))].map((x, i) => (
-            <Table.Row>
-              <Table.Cell>
-                <Country
-                  country={availableCountries[i]}
-                  onCountrySelection={onCountrySelection}
-                />
-              </Table.Cell>
-              <Table.Cell>
-                <Country
-                  country={
-                    availableCountries[
-                      i + Math.round(availableCountries.length / 4)
-                    ]
-                  }
-                  onCountrySelection={onCountrySelection}
-                />
-              </Table.Cell>
-              <Table.Cell>
-                <Country
-                  country={
-                    availableCountries[
-                      i + Math.round(availableCountries.length / 4) * 2
-                    ]
-                  }
-                  onCountrySelection={onCountrySelection}
-                />
-              </Table.Cell>
-              <Table.Cell>
-                <Country
-                  country={countries[i + Math.round(countries.length / 4) * 3]}
-                  onCountrySelection={onCountrySelection}
-                />
-              </Table.Cell>
-            </Table.Row>
-          ))}
+          {[...Array(Math.ceil(availableCountries.length / 4))].map(
+            (x, i) => (
+              <Table.Row>
+                <Table.Cell>
+                  <Country
+                    country={availableCountries[i]}
+                    onCountrySelection={onCountrySelection}
+                  />
+                </Table.Cell>
+                <Table.Cell>
+                  <Country
+                    country={
+                      availableCountries[
+                        i + Math.ceil(availableCountries.length / 4) + 1
+                      ]
+                    }
+                    onCountrySelection={onCountrySelection}
+                  />
+                </Table.Cell>
+                <Table.Cell>
+                  <Country
+                    country={
+                      availableCountries[
+                        i + Math.ceil(availableCountries.length / 4) * 2 + 2
+                      ]
+                    }
+                    onCountrySelection={onCountrySelection}
+                  />
+                </Table.Cell>
+                <Table.Cell>
+                  <Country
+                    country={availableCountries[i + Math.ceil(availableCountries.length / 4) * 3 + 3]}
+                    onCountrySelection={onCountrySelection}
+                  />
+                </Table.Cell>
+              </Table.Row>
+            )
+          )}
         </Table.Body>
       </Table>
     </div>
