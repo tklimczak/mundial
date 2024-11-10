@@ -26,31 +26,32 @@ export const WinnerList: React.FC<WinnerListProps> = ({
   competitions
 }) => {
 
+  if (competitions.length == 0) { 
+    return (<div><br></br>wybierz skocznie i zawodnikow</div>)
+  }
+
   let scores = getScores();
   let players = competitions[0].players;
 
-  console.log(JSON.stringify(competitions));
-
   let scoredPlayers: ScoredPlayer[] = [];
 
-  competitions.forEach(c=> {
+  competitions.forEach(c => {
     players.map(p => {
-      let found = scoredPlayers.find(x=>x.player.name === p.name);
+      let found = scoredPlayers.find(x => x.player.name === p.name);
       if (!found)
         scoredPlayers.push({ player: p, score: 0 })
     })
   })
-   console.table(competitions);
-  competitions.forEach(c=> {
+  competitions.forEach(c => {
 
     for (let i = 0; i < c.players.length; i++) {
-      let index = scoredPlayers.findIndex(x=>x.player.name === c.players[i].name);
+      let index = scoredPlayers.findIndex(x => x.player.name === c.players[i].name);
       if (index >= 0) {
         scoredPlayers[index].score += scores[i] ? scores[i] : 0;
       }
     }
   })
- 
+
 
   return (
     <CardGroup itemsPerRow={1}>
