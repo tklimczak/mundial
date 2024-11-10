@@ -92,6 +92,7 @@ export const getHills = (): Hill[] => {
   hills.push({ name: "Trondheim 138", hs: 138, country_code: "NO" });
   hills.push({ name: "Vikersund", hs: 240, country_code: "NO" });
   hills.push({ name: "Planica", hs: 240, country_code: "SI" });
+  hills.push({ name: "Kulm", hs: 235, country_code: "AT" });
 
   return hills;
 };
@@ -99,3 +100,6 @@ export const getHills = (): Hill[] => {
 export const getScores = (): number[] => {
   return [100,80,60,50,45,40, 36,32,29,26,24,22,20,18,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1];
 };
+
+
+
