@@ -22,8 +22,11 @@ function App() {
     setGroups(groups);
   };
 
-  const changePlayerState=(name:string):void =>{
-    
+  const changePlayerState=(name:string| null):void =>{
+    if (name == null) {
+      setPlayers([])
+      return;
+    }
     let found = selectedPlayers.find(x=>x == name);
     if (found) {
       let newList  = selectedPlayers.filter(x=>x != name);
@@ -35,8 +38,12 @@ function App() {
     }
   }
 
-  const changeHillsState=(name:string):void =>{
+  const changeHillsState=(name:string | null):void =>{
     
+    if (name == null) {
+      setHills([])
+      return;
+    }
     let found = selectedHills.find(x=>x == name);
     if (found) {
       let newList  = selectedHills.filter(x=>x != name);
@@ -64,13 +71,13 @@ function App() {
       </Tab.Pane>,
     },
     {
-      menuItem: "Lista Skoczkow",
+      menuItem: "Lista Skoczkow (" + selectedPlayers.length + ")",
       render: () => <Tab.Pane attached={false}>
         <SkiJumpingPlayers selectedPlayers={selectedPlayers} changePlayerState={changePlayerState}/>
       </Tab.Pane>,
     },
     {
-      menuItem: "Lista Skoczni",
+      menuItem: "Lista Skoczni (" + selectedHills.length + ")",
       render: () => <Tab.Pane attached={false}>
         <SkiJumpingHills selectedHills={selectedHills} changeHillsState={changeHillsState}/>
       </Tab.Pane>,
