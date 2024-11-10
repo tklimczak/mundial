@@ -17,6 +17,7 @@ export interface Competition {
 export interface ScoredPlayer {
   player: Player
   score: number
+  winning: string
 }
 interface WinnerListProps {
   competitions: Competition[];
@@ -39,7 +40,7 @@ export const WinnerList: React.FC<WinnerListProps> = ({
     players.map(p => {
       let found = scoredPlayers.find(x => x.player.name === p.name);
       if (!found)
-        scoredPlayers.push({ player: p, score: 0 })
+        scoredPlayers.push({ player: p, score: 0, winning:'' })
     })
   })
   competitions.forEach(c => {
@@ -48,10 +49,10 @@ export const WinnerList: React.FC<WinnerListProps> = ({
       let index = scoredPlayers.findIndex(x => x.player.name === c.players[i].name);
       if (index >= 0) {
         scoredPlayers[index].score += scores[i] ? scores[i] : 0;
+        scoredPlayers[index].winning += ' ' + (i + 1) + ', '
       }
     }
   })
-
 
   return (
     <CardGroup itemsPerRow={1}>
@@ -67,6 +68,9 @@ export const WinnerList: React.FC<WinnerListProps> = ({
                     <PlayerCard player={player.player} />
                   </Table.Cell>
 
+                  <Table.Cell>
+                    {player.winning}
+                  </Table.Cell>
                   <Table.Cell>
                     {player.score}
                   </Table.Cell>
