@@ -42,12 +42,6 @@ export const Eliminations: React.FC<GroupPros> = ({ groups, setGroups }) => {
     }
   });
 
-  console.log(
-    "availableCountries",
-    availableCountries,
-    Math.ceil(availableCountries.length / 4)
-  );
-
   return (
     <div>
       <Grid>
